@@ -1,23 +1,23 @@
-#ifndef __CONTAINER_HPP__
-#define __CONTAINER_HPP__
+#ifndef __CONTAINER_CPU_HPP__
+#define __CONTAINER_CPU_HPP__
 
 
-/* container that miniques the behaviour of a CUDA-based container */
+/* container_cpu that miniques the behaviour of a CUDA-based container_cpu */
 
 #include<cstdlib>
 #include<cstring>
 #include<stdexcept>
 
 template<class T>
-class container
+class container_cpu
 {
 public:
-    container(int muliplyer_ = 2, int init_steps_ = 100):
+    container_cpu(size_t muliplyer_ = 2, size_t init_steps_ = 100):
     muliplyer(muliplyer_),
     steps(init_steps_)
     {
     }
-    ~container()
+    ~container_cpu()
     {
         if(storage != nullptr)
         {
@@ -27,7 +27,7 @@ public:
     }
 
 
-    void init(int size_)
+    void init(size_t size_)
     {
         size = size_;
         storage = (T*)std::malloc(size*steps*sizeof(T));
@@ -39,7 +39,7 @@ public:
     {
         if(!init_done)
         {
-            throw std::logic_error("calling push_back withough initialization. Call init(size).");
+            throw std::logic_error("calling push_back withough initialization. Call init(size) first.");
         }
         if(steps_pushed<steps)
         {
@@ -58,11 +58,11 @@ public:
         _fit();
     }
 
-    int get_size()
+    size_t get_size()
     {
         return steps_pushed;
     }
-    int capacity()
+    size_t capacity()
     {
         return steps;
     }
@@ -75,15 +75,15 @@ public:
 private: 
     T* storage = nullptr;
     bool init_done = false;
-    int steps;
-    int size;
-    int steps_pushed = 0;
-    int muliplyer = 2;
+    size_t steps;
+    size_t size;
+    size_t steps_pushed = 0;
+    size_t muliplyer = 2;
 
     void _realloc()
     {
         T* __storage = nullptr;
-        int steps_new = steps*muliplyer;
+        size_t steps_new = steps*muliplyer;
         __storage = (T*)std::malloc(size*steps_new*sizeof(T));
         if(__storage == nullptr)
         {
