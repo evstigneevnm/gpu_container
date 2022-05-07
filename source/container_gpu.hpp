@@ -40,7 +40,7 @@ public:
     {
         if(!init_done)
         {
-            throw std::logic_error("calling push_back withough initialization. Call init(size) first.");
+            throw std::logic_error("calling push_back() withough initialization. Call init(size) first.");
         }
         if(steps_pushed<steps)
         {
@@ -86,7 +86,7 @@ private:
         size_t steps_new = steps*muliplyer;
         try
         {
-        __storage = (T*)device_allocate<T>(size*steps_new);
+            __storage = (T*)device_allocate<T>(size*steps_new);
         }
         catch(const std::runtime_error& e)
         {
@@ -103,7 +103,7 @@ private:
         T* __storage = nullptr;
         try
         {        
-        __storage = (T*)device_allocate<T>(size*steps_pushed);
+            __storage = (T*)device_allocate<T>(size*steps_pushed);
         }
         catch(const std::runtime_error& e)
         {
