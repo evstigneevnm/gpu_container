@@ -12,3 +12,6 @@ Constructor takes two optional parameters:
 - container(int muliplyer_ = 2, int init_steps_ = 100)
 muliplyer_ - adjusts the internal storage if the data doesnot fit for the next push_back()
 init_steps_ - amount of data that is initially reserved in the internal storage.             
+
+# index_table
+Added quasi-dynamically adjustable indexing table for GPU, see dynamic_index_table_gpu.h and test_dynamic_table_gpu.cu
