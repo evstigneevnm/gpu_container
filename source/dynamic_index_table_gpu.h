@@ -125,7 +125,10 @@ public:
                 for(int l = 0; l < n_ids; l++)
                 {
                     if( container_all(j, l) == k )
+                    {
                         found = true;
+                        break;
+                    }
                 }
             }
             return found;
